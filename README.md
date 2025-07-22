@@ -6,10 +6,12 @@
 
 
 #items database:
+
 | id | item_name | item_desc | merchant_id |
 
 
 #order database:
+
 | id | item_id | num_of_items | location |
 
 
