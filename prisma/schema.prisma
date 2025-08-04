@@ -14,7 +14,16 @@ model User {
   email     String   
   name      String
   password  String   
+  restOwned Resturant[]
   role      Role     @default(user)
+}
+
+model Resturant {
+  id        String      @id @default(uuid())
+  name      String  
+  location  String
+  ownerId   String
+  owner     User        @relation(fields: [ownerId], references: [id]) 
 }
 
 enum Role {
@@ -22,3 +31,16 @@ enum Role {
   admin
   merchant
 }
+
+// Implement a pivot table to make the back relation from the Resturant table to the User table
+
+
+
+//model Food {
+   //id        String      @id @default(uuid())
+  // name      String
+ //  price     String
+//  hotel     Resturant   @relation(fields: [restId], references: [id])
+//}
+
+
