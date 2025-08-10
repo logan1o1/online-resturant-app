@@ -23,8 +23,19 @@ model Resturant {
   name      String  
   location  String
   ownerId   String
+  items     Food[]
   owner     User        @relation(fields: [ownerId], references: [id]) 
 }
+
+model Food {
+   id        String      @id @default(uuid())
+   name      String
+   price     String
+   ingredients String
+   restId    String
+   hotel     Resturant   @relation(fields: [restId], references: [id])
+}
+
 
 enum Role {
   user
@@ -36,11 +47,5 @@ enum Role {
 
 
 
-//model Food {
-   //id        String      @id @default(uuid())
-  // name      String
- //  price     String
-//  hotel     Resturant   @relation(fields: [restId], references: [id])
-//}
 
 
