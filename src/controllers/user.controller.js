@@ -90,7 +90,22 @@ export async function update(req, res, next) {
   } catch (error) {
     next(error);
   }
+}
 
+export async function getDetails(req, res, next) {
+  const id = req.params.id;
+
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id },
+      select: { id: true, name: true, username: true, email: true, role: true, createdAt: true, restOwned: true }
+    })
+    if (!user) return res.status(404).json({ message: "user not found" });
+
+    res.status(200).json(user)
+  } catch (error) {
+    next(error)
+  }
 }
 
 

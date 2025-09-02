@@ -9,15 +9,16 @@ generator client {
 
 model User {
   id        String      @id @default(uuid())
-  createdAt DateTime @default(now())
-  username  String   @unique
+  createdAt DateTime    @default(now())
+  username  String      @unique
   email     String   
   name      String
   password  String   
   restOwned Resturant[]
-  role      Role     @default(user)
+  role      Role        @default(user)
 }
 
+// pivit table
 model Resturant {
   id        String      @id @default(uuid())
   name      String  
@@ -28,12 +29,12 @@ model Resturant {
 }
 
 model Food {
-   id        String      @id @default(uuid())
-   name      String
-   price     String
+   id          String      @id @default(uuid())
+   name        String
+   price       String
    ingredients String
-   restId    String
-   hotel     Resturant   @relation(fields: [restId], references: [id])
+   restId      String
+   hotel       Resturant   @relation(fields: [restId], references: [id])
 }
 
 

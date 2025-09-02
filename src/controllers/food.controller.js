@@ -1,5 +1,4 @@
-import prisma from "../config/prismaClient";
-
+import prisma from "../config/prismaClient.js";
 
 export async function createFood(req, res, next) {
   const { name, price, ingredients } = req.body;
@@ -8,6 +7,8 @@ export async function createFood(req, res, next) {
   if (!name, !price, !ingredients) {
     return res.status(405).json({ message: "you must fill all the parameters" })
   }
+
+  // const ingredientsStr = ingredients.join(', ');
 
   try {
     const resturant = await prisma.resturant.findUnique({ where: { id: restId } })
@@ -33,7 +34,7 @@ export async function createFood(req, res, next) {
   }
 }
 
-export async function getFoodIteGm(req, res, next) {
+export async function getFoodItem(req, res, next) {
   try {
     const foodItems = await prisma.food.findMany()
     if (!foodItems) {
@@ -53,7 +54,7 @@ export async function updateFoodItem(req, res, next) {
   try {
     const foodItem = await prisma.food.findUnique({ where: { id } })
     if (!foodItem) {
-      return res.status(404).json({ message: "The food doesn't exist'" })
+      return res.status(404).json({ message: "The food doesn't exist" })
     }
 
     const updatedFoodItem = await prisma.food.update({
